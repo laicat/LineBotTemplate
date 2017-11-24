@@ -36,33 +36,4 @@ func main() {
 	http.ListenAndServe(addr, nil)
 }
 
-// NewKitchenSink function
-func NewKitchenSink(channelSecret, channelToken, appBaseURL string) (*KitchenSink, error) {
-	apiEndpointBase := os.Getenv("ENDPOINT_BASE")
-	if apiEndpointBase == "" {
-		apiEndpointBase = linebot.APIEndpointBase
-	}
-	bot, err := linebot.New(
-		channelSecret,
-		channelToken,
-		linebot.WithEndpointBase(apiEndpointBase), // Usually you omit this.
-	)
-	if err != nil {
-		return nil, err
-	}
-	downloadDir := filepath.Join(filepath.Dir(os.Args[0]), "line-bot")
-	_, err = os.Stat(downloadDir)
-	if err != nil {
-		if err := os.Mkdir(downloadDir, 0777); err != nil {
-			return nil, err
-		}
-	}
-	return &KitchenSink{
-		bot:         bot,
-		appBaseURL:  appBaseURL,
-		downloadDir: downloadDir,
-	}, nil
-}
-
-// Callback function for http server
 
