@@ -14,16 +14,13 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
-	"path/filepath"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
+
 var bot *linebot.Client
 
 func main() {
@@ -35,5 +32,3 @@ func main() {
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)
 }
-
-
